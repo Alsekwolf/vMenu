@@ -36,6 +36,8 @@ namespace vMenuClient
         private Menu menu;
 
         public bool EnableIplTeleports { get; private set; } = UserDefaults.IPLEnableTeleports;
+        public static bool EnableIplMapBlips { get; private set; } = UserDefaults.IPLEnableTeleports;
+
         public bool EnableIplTvs { get; private set; } = UserDefaults.IPLEnableTVs;
         public int SelectedTvChannel { get; private set; } = 0;
         public bool EnableIplRadios { get; private set; } = UserDefaults.IPLEnableRadios;
@@ -78,6 +80,7 @@ namespace vMenuClient
 
             // create checkbox items
             MenuCheckboxItem enableInteriorTeleportMarkers = new MenuCheckboxItem("Enable Interior Teleport Markers", "Enables or disables the markers and teleporting options for interiors loaded by the bob74_ipl resource.", EnableIplTeleports);
+            MenuCheckboxItem enableBlipMarkers = new MenuCheckboxItem("Enable map blips for interiors", "Enables or disables the map blis for interiors.", EnableIplMapBlips);
             MenuItem hangars = new MenuItem("Aircraft Hangars", "Customize the aircraft hanger interior.") { Label = "→→→" };
             MenuItem apartments = new MenuItem("Apartments", "Every apartment can have it's own style, customize them all here.") { Label = "→→→" };
             MenuItem bunkers = new MenuItem("Bunkers", "Customize the bunker interior.") { Label = "→→→", Enabled = false, LeftIcon = MenuItem.Icon.LOCK };
@@ -99,6 +102,8 @@ namespace vMenuClient
 
             // add items to the menu.
             menu.AddMenuItem(enableInteriorTeleportMarkers);
+            menu.AddMenuItem(enableBlipMarkers);
+
 
             menu.AddMenuItem(hangars);
             menu.AddMenuItem(apartments);
@@ -120,6 +125,10 @@ namespace vMenuClient
             // check for checkbox changes.
             menu.OnCheckboxChange += (sender, item, index, _checked) =>
             {
+                if (item == enableBlipMarkers)
+                {
+                    EnableIplMapBlips = _checked;
+                }
                 if (item == enableInteriorTeleportMarkers)
                 {
                     EnableIplTeleports = _checked;

@@ -3902,8 +3902,6 @@ namespace vMenuClient
                         }
                     }
                 }
-
-
             }
         }
         #endregion

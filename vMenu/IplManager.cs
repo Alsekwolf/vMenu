@@ -289,25 +289,27 @@ namespace vMenuClient
                 });
                 #endregion
 
-                var blipLocations = new List<Vector3>();
-                foreach (Interior inter in interiors)
+                if (IplMenu.EnableIplMapBlips)
                 {
-                    if (inter is Apartment || inter is Penthouse || inter is House)
+                    var blipLocations = new List<Vector3>();
+                    foreach (Interior inter in interiors)
                     {
-                        foreach (var pos in inter.posTpExt)
+                        if (inter is Apartment || inter is Penthouse || inter is House)
                         {
-                            if (pos != Vector3.Zero)
+                            foreach (var pos in inter.posTpExt)
                             {
-                                if (!blipLocations.Contains(pos))
+                                if (pos != Vector3.Zero)
                                 {
-                                    var b = AddBlipForCoord(pos.X, pos.Y, pos.Z);
-                                    SetBlipSprite(b, 40);
-                                    blipLocations.Add(pos);
-                                    SetBlipAsShortRange(b, true);
+                                    if (!blipLocations.Contains(pos))
+                                    {
+                                        var b = AddBlipForCoord(pos.X, pos.Y, pos.Z);
+                                        SetBlipSprite(b, 40);
+                                        blipLocations.Add(pos);
+                                        SetBlipAsShortRange(b, true);
+                                    }
                                 }
                             }
                         }
-
                     }
                 }
                 #endregion
