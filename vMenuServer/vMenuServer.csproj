@@ -12,37 +12,35 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>embedded</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\..\build\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;SERVER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>embedded</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>..\..\build\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;SERVER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DebugSymbols>true</DebugSymbols>
     <NoWarn>
     </NoWarn>
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CitizenFX.Core.Server">
-      <HintPath>..\dependencies\server\CitizenFX.Core.Server.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dependencies\shared\Newtonsoft.Json.dll</HintPath>
@@ -52,17 +50,16 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.CSharp">
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="vMenuShared.net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\dependencies\shared\vMenuShared.net.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SharedClasses\ConfigManager.cs" />
+    <Compile Include="..\SharedClasses\PermissionsManager.cs" />
     <Compile Include="BanManager.cs" />
     <Compile Include="MainServer.cs" />
     <Compile Include="HttpHelper.cs" />
@@ -70,6 +67,10 @@
     <Compile Include="UpdateChecker.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\dependencies\server\libSQLite.Interop.so">
+      <Link>libSQLite.Interop.so</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="config\addons.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -87,21 +88,22 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Data.SQLite.Core">
+      <Version>1.0.110</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CitizenFX.Core.Server">
+      <Version>1.0.1141</Version>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent Condition=" '$(OS)' == 'Unix'">
     </PostBuildEvent>
-    <PostBuildEvent Condition="'$(OS)' == 'Windows_NT'">if /I "$(SolutionDir)"=="D:\Tom Grobbe\Documents\GitHub-Repos\vMenu\vMenu\" (
-    copy /Y "D:\Tom Grobbe\Documents\GitHub-Repos\vMenu\build\System.Numerics.dll" "D:\FXserver\server-data\"
-    copy /Y "D:\Tom Grobbe\Documents\GitHub-Repos\vMenu\build\Newtonsoft.Json.dll" "D:\FXserver\vmenu\resources\vMenu\"
-    copy /Y "D:\Tom Grobbe\Documents\GitHub-Repos\vMenu\build\vMenuServer.net.dll" "D:\FXserver\vmenu\resources\vMenu\"
-    if not defined DONT_COPY_CONFIG (
-        copy /Y "D:\Tom Grobbe\Documents\GitHub-Repos\vMenu\build\config\addons.json" "D:\FXserver\vmenu\resources\vMenu\config\"
-        copy /Y "D:\Tom Grobbe\Documents\GitHub-Repos\vMenu\build\config\locations.json" "D:\FXserver\vmenu\resources\vMenu\config\"
-        copy /Y "D:\Tom Grobbe\Documents\GitHub-Repos\vMenu\build\config\permissions.cfg" "D:\FXserver\vmenu\resources\vMenu\config\"
-        <!-- copy /Y "D:\Tom Grobbe\Documents\GitHub-Repos\vMenu\build\config\permissions.cfg" "D:\FXserver\vMenu\" -->
-    )
-)
-</PostBuildEvent>
+    <PostBuildEvent Condition=" '$(OS)' == 'Windows_NT'">
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>

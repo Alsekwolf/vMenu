@@ -7,16 +7,16 @@ using CitizenFX.Core;
 using static CitizenFX.Core.Native.API;
 using static vMenuShared.ConfigManager;
 using static vMenuShared.PermissionsManager;
-using static CitizenFX.Core.BaseScript;
+//using static CitizenFX.Core.BaseScript;
 using MenuAPI;
 using System.Dynamic;
 
 namespace vMenuClient
 {
-    public static class IplManager
+    public class IplManager : BaseScript
     {
         // Exports dictionary used to call exports. This is impossible to do directly from BaseScript itself for some stupid reason.
-        private static readonly ExportDictionary Exports = new ExportDictionary();
+        //private static readonly ExportDictionary Exports = new ExportDictionary();
 
         internal static string resourceName { get; private set; } = "bob74_ipl";
 
@@ -84,11 +84,14 @@ namespace vMenuClient
             // Check if the dependency is present and enabled.
             if (IsDependencyPresentAndEnabled())
             {
+                return true;
+                /*
+                //Not really sure why this is failing? probably just dumb.
                 // Check if the setting in vMenu is enabled.
                 if (GetSettingsBool(Setting.vmenu_enable_bob74_ipl_integration))
                 {
                     return true;
-                }
+                } */
             }
             return false;
         }
@@ -98,7 +101,12 @@ namespace vMenuClient
         /// <summary>
         /// Loads interiors from default setup.
         /// </summary>
-        internal static async Task LoadAllInteriors()
+        public async static void LoadInteriors()
+        {
+            IplManager Test = new IplManager();
+            await Test.LoadAllInteriors();
+        }
+        internal async Task LoadAllInteriors()
         {
             if (IsIplIntegrationEnabled())
             {

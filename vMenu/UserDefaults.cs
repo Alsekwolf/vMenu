@@ -82,10 +82,40 @@ namespace vMenuClient
             get { return GetSettingsBool("vehicleGodMode"); }
             set { SetSavedSettingsBool("vehicleGodMode", value); }
         }
-        public static bool VehicleSpecialGodMode
+        public static bool VehicleGodInvincible
         {
-            get { return GetSettingsBool("vehicleSpecialGodMode"); }
-            set { SetSavedSettingsBool("vehicleSpecialGodMode", value); }
+            get { return GetSettingsBool("vehicleGodInvincible"); }
+            set { SetSavedSettingsBool("vehicleGodInvincible", value); }
+        }
+        public static bool VehicleGodEngine
+        {
+            get { return GetSettingsBool("vehicleGodEngine"); }
+            set { SetSavedSettingsBool("vehicleGodEngine", value); }
+        }
+        public static bool VehicleGodVisual
+        {
+            get { return GetSettingsBool("vehicleGodVisual"); }
+            set { SetSavedSettingsBool("vehicleGodVisual", value); }
+        }
+        public static bool VehicleGodDamage
+        {
+            get { return GetSettingsBool("vehicleGodDamage"); }
+            set { SetSavedSettingsBool("vehicleGodDamage", value); }
+        }
+        public static bool VehicleGodStrongWheels
+        {
+            get { return GetSettingsBool("vehicleGodStrongWheels"); }
+            set { SetSavedSettingsBool("vehicleGodStrongWheels", value); }
+        }
+        public static bool VehicleGodRamp
+        {
+            get { return GetSettingsBool("vehicleGodRamp"); }
+            set { SetSavedSettingsBool("vehicleGodRamp", value); }
+        }
+        public static bool VehicleGodAutoRepair
+        {
+            get { return GetSettingsBool("vehicleGodAutoRepair"); }
+            set { SetSavedSettingsBool("vehicleGodAutoRepair", value); }
         }
 
         public static bool VehicleNeverDirty
@@ -123,6 +153,12 @@ namespace vMenuClient
             get { return GetSettingsBool("vehicleDisablePlaneTurbulence"); }
             set { SetSavedSettingsBool("vehicleDisablePlaneTurbulence", value); }
         }
+
+        public static bool VehicleBikeSeatbelt
+        {
+            get { return GetSettingsBool("vehicleBikeSeatbelt"); }
+            set { SetSavedSettingsBool("vehicleBikeSeatbelt", value); }
+        }
         #endregion
 
         #region Vehicle Spawner Options
@@ -150,6 +186,12 @@ namespace vMenuClient
         {
             get { return GetSettingsBool("weaponsUnlimitedAmmo"); }
             set { SetSavedSettingsBool("weaponsUnlimitedAmmo", value); }
+        }
+
+        public static bool WeaponsUnlimitedParachutes
+        {
+            get { return GetSettingsBool("weaponsUnlimitedParachutes"); }
+            set { SetSavedSettingsBool("weaponsUnlimitedParachutes", value); }
         }
 
         public static bool AutoEquipChute
@@ -202,6 +244,12 @@ namespace vMenuClient
             set { SetSavedSettingsBool("miscShowPlayerBlips", value); }
         }
 
+        public static bool MiscShowOverheadNames
+        {
+            get { return GetSettingsBool("miscShowOverheadNames"); }
+            set { SetSavedSettingsBool("miscShowOverheadNames", value); }
+        }
+
         public static bool MiscRestorePlayerAppearance
         {
             get { return GetSettingsBool("miscRestorePlayerAppearance"); }
@@ -232,6 +280,30 @@ namespace vMenuClient
             set { SetSavedSettingsBool("miscRightAlignMenu", value); }
         }
 
+        public static bool MiscDisablePrivateMessages
+        {
+            get { return GetSettingsBool("miscDisablePrivateMessages"); }
+            set { SetSavedSettingsBool("miscDisablePrivateMessages", value); }
+        }
+
+        public static bool MiscDisableControllerSupport
+        {
+            get { return GetSettingsBool("miscDisableControllerSupport"); }
+            set { SetSavedSettingsBool("miscDisableControllerSupport", value); }
+        }
+
+        public static int MiscLastTimeCycleModifierIndex
+        {
+            get { return GetSettingsInt("miscLastTimeCycleModifierIndex"); }
+            set { SetSavedSettingsInt("miscLastTimeCycleModifierIndex", value); }
+        }
+
+        public static int MiscLastTimeCycleModifierStrength
+        {
+            get { return GetSettingsInt("miscLastTimeCycleModifierStrength"); }
+            set { SetSavedSettingsInt("miscLastTimeCycleModifierStrength", value); }
+        }
+
         #region keybind menu
         public static bool KbTpToWaypoint
         {
@@ -242,6 +314,16 @@ namespace vMenuClient
         {
             get { return GetSettingsBool("kbDriftMode"); }
             set { SetSavedSettingsBool("kbDriftMode", value); }
+        }
+        public static bool KbRecordKeys
+        {
+            get { return GetSettingsBool("kbRecordKeys"); }
+            set { SetSavedSettingsBool("kbRecordKeys", value); }
+        }
+        public static bool KbRadarKeys
+        {
+            get { return GetSettingsBool("kbRadarKeys"); }
+            set { SetSavedSettingsBool("kbRadarKeys", value); }
         }
         #endregion
         #endregion
@@ -287,7 +369,7 @@ namespace vMenuClient
             set { SetSavedSettingsBool("weaponLoadoutsSetLoadoutOnRespawn", value); }
         }
         #endregion
-
+        
         #region IPL Management menu
         public static bool IPLEnableTeleports
         {
@@ -306,7 +388,14 @@ namespace vMenuClient
             get { return GetSettingsBool("iplEnableRadios"); }
             set { SetSavedSettingsBool("iplEnableRadios", value); }
         }
+        #endregion
 
+        #region Personal Vehicle
+        public static bool PVEnableVehicleBlip
+        {
+            get { return GetSettingsBool("pvEnableVehicleBlip"); }
+            set { SetSavedSettingsBool("pvEnableVehicleBlip", value); }
+        }
         #endregion
         #endregion
 
@@ -327,7 +416,26 @@ namespace vMenuClient
             if (!exists)
             {
                 // Some options should be enabled by default:
-                if (kvpString == "unlimitedStamina" || kvpString == "miscDeathNotifications" || kvpString == "miscJoinQuitNotifications" || kvpString == "vehicleSpawnerSpawnInside" || kvpString == "vehicleSpawnerReplacePrevious" || kvpString == "neverWanted" || kvpString == "voiceChatShowSpeaker" || kvpString == "voiceChatEnabled" || kvpString == "autoEquipParachuteWhenInPlane" || kvpString == "miscRestorePlayerAppearance" || kvpString == "miscRestorePlayerWeapons" || kvpString == "miscRightAlignMenu" || kvpString == "miscRespawnDefaultCharacter" || kvpString == "iplEnableTeleports" || kvpString == "iplEnableRadios")
+                if (
+                    kvpString == "unlimitedStamina" ||
+                    kvpString == "miscDeathNotifications" ||
+                    kvpString == "miscJoinQuitNotifications" ||
+                    kvpString == "vehicleSpawnerSpawnInside" ||
+                    kvpString == "vehicleSpawnerReplacePrevious" ||
+                    kvpString == "neverWanted" ||
+                    kvpString == "voiceChatShowSpeaker" ||
+                    kvpString == "voiceChatEnabled" ||
+                    kvpString == "autoEquipParachuteWhenInPlane" ||
+                    kvpString == "miscRestorePlayerAppearance" ||
+                    kvpString == "miscRestorePlayerWeapons" ||
+                    kvpString == "miscRightAlignMenu" ||
+                    kvpString == "miscRespawnDefaultCharacter" ||
+                    kvpString == "vehicleGodInvincible" ||
+                    kvpString == "vehicleGodEngine" ||
+                    kvpString == "vehicleGodVisual" ||
+                    kvpString == "vehicleGodStrongWheels" ||
+                    kvpString == "vehicleGodRamp"
+                    )
                 {
                     SetSavedSettingsBool(kvpString, true);
                     return true;
@@ -456,6 +564,9 @@ namespace vMenuClient
                 MiscShowPlayerBlips = MainMenu.MiscSettingsMenu.ShowPlayerBlips;
                 prefs.Add("miscShowPlayerBlips", MiscShowPlayerBlips);
 
+                MiscShowOverheadNames = MainMenu.MiscSettingsMenu.MiscShowOverheadNames;
+                prefs.Add("miscShowOverheadNames", MiscShowOverheadNames);
+
                 MiscRespawnDefaultCharacter = MainMenu.MiscSettingsMenu.MiscRespawnDefaultCharacter;
                 prefs.Add("miscRespawnDefaultCharacter", MiscRespawnDefaultCharacter);
 
@@ -471,11 +582,23 @@ namespace vMenuClient
                 MiscRightAlignMenu = MainMenu.MiscSettingsMenu.MiscRightAlignMenu;
                 prefs.Add("miscRightAlignMenu", MiscRightAlignMenu);
 
+                MiscDisablePrivateMessages = MainMenu.MiscSettingsMenu.MiscDisablePrivateMessages;
+                prefs.Add("miscDisablePrivateMessages", MiscDisablePrivateMessages);
+
+                MiscDisableControllerSupport = MainMenu.MiscSettingsMenu.MiscDisableControllerSupport;
+                prefs.Add("miscDisableControllerSupport", MiscDisableControllerSupport);
+
                 KbTpToWaypoint = MainMenu.MiscSettingsMenu.KbTpToWaypoint;
                 prefs.Add("kbTpToWaypoint", KbTpToWaypoint);
 
                 KbDriftMode = MainMenu.MiscSettingsMenu.KbDriftMode;
                 prefs.Add("kbDriftMode", KbDriftMode);
+
+                KbRecordKeys = MainMenu.MiscSettingsMenu.KbRecordKeys;
+                prefs.Add("kbRecordKeys", KbRecordKeys);
+
+                KbRadarKeys = MainMenu.MiscSettingsMenu.KbRadarKeys;
+                prefs.Add("kbRadarKeys", KbRadarKeys);
             }
 
             if (MainMenu.VehicleOptionsMenu != null)
@@ -486,8 +609,21 @@ namespace vMenuClient
                 VehicleGodMode = MainMenu.VehicleOptionsMenu.VehicleGodMode;
                 prefs.Add("vehicleGodMode", VehicleGodMode);
 
-                VehicleSpecialGodMode = MainMenu.VehicleOptionsMenu.VehicleSpecialGodMode;
-                prefs.Add("vehicleSpecialGodMode", VehicleSpecialGodMode);
+                VehicleGodInvincible = MainMenu.VehicleOptionsMenu.VehicleGodInvincible;
+                prefs.Add("vehicleGodInvincible", VehicleGodInvincible);
+                VehicleGodEngine = MainMenu.VehicleOptionsMenu.VehicleGodEngine;
+                prefs.Add("vehicleGodEngine", VehicleGodEngine);
+                VehicleGodVisual = MainMenu.VehicleOptionsMenu.VehicleGodVisual;
+                prefs.Add("vehicleGodVisual", VehicleGodVisual);
+                VehicleGodStrongWheels = MainMenu.VehicleOptionsMenu.VehicleGodStrongWheels;
+                prefs.Add("vehicleGodStrongWheels", VehicleGodStrongWheels);
+                VehicleGodRamp = MainMenu.VehicleOptionsMenu.VehicleGodRamp;
+                prefs.Add("vehicleGodRamp", VehicleGodRamp);
+                VehicleGodAutoRepair = MainMenu.VehicleOptionsMenu.VehicleGodAutoRepair;
+                prefs.Add("vehicleGodAutoRepair", VehicleGodAutoRepair);
+
+                //VehicleSpecialGodMode = MainMenu.VehicleOptionsMenu.VehicleSpecialGodMode;
+                //prefs.Add("vehicleSpecialGodMode", VehicleSpecialGodMode);
 
                 VehicleNeverDirty = MainMenu.VehicleOptionsMenu.VehicleNeverDirty;
                 prefs.Add("vehicleNeverDirty", VehicleNeverDirty);
@@ -503,6 +639,9 @@ namespace vMenuClient
 
                 VehicleDisablePlaneTurbulence = MainMenu.VehicleOptionsMenu.DisablePlaneTurbulence;
                 prefs.Add("vehicleDisablePlaneTurbulence", VehicleDisablePlaneTurbulence);
+
+                VehicleBikeSeatbelt = MainMenu.VehicleOptionsMenu.VehicleBikeSeatbelt;
+                prefs.Add("vehicleBikeSeatbelt", VehicleBikeSeatbelt);
             }
 
             if (MainMenu.VehicleSpawnerMenu != null)
@@ -536,6 +675,12 @@ namespace vMenuClient
 
                 WeaponsUnlimitedAmmo = MainMenu.WeaponOptionsMenu.UnlimitedAmmo;
                 prefs.Add("weaponsUnlimitedAmmo", WeaponsUnlimitedAmmo);
+
+                WeaponsUnlimitedParachutes = MainMenu.WeaponOptionsMenu.UnlimitedParachutes;
+                prefs.Add("weaponsUnlimitedParachutes", WeaponsUnlimitedParachutes);
+
+                AutoEquipChute = MainMenu.WeaponOptionsMenu.AutoEquipChute;
+                prefs.Add("autoEquipParachuteWhenInPlane", AutoEquipChute);
             }
 
             if (PlayerAppearance.ClothingAnimationType >= 0)
@@ -550,16 +695,10 @@ namespace vMenuClient
                 prefs.Add("weaponLoadoutsSetLoadoutOnRespawn", WeaponLoadoutsSetLoadoutOnRespawn);
             }
 
-            if (MainMenu.IplManagementMenu != null)
+            if (MainMenu.PersonalVehicleMenu != null)
             {
-                IPLEnableRadios = MainMenu.IplManagementMenu.EnableIplRadios;
-                prefs.Add("iplEnableRadios", IPLEnableRadios);
-
-                IPLEnableTVs = MainMenu.IplManagementMenu.EnableIplTvs;
-                prefs.Add("iplEnableTVs", IPLEnableTVs);
-
-                IPLEnableTeleports = MainMenu.IplManagementMenu.EnableIplTeleports;
-                prefs.Add("iplEnableTeleports", IPLEnableTeleports);
+                PVEnableVehicleBlip = MainMenu.PersonalVehicleMenu.EnableVehicleBlip;
+                prefs.Add("pvEnableVehicleBlip", PVEnableVehicleBlip);
             }
 
             Notify.Success("Your settings have been saved.");
