@@ -929,29 +929,32 @@ namespace vMenuClient
                         }
                     }
                 }
-
-                if (GetProfileSetting(221) == 1) // 221 = settings > display > expanded radar
+                //This makes it so it's that this option has NO affect when it's toggle (Prevousily it would stop the map from being set big by another resource)
+                if (MainMenu.MiscSettingsMenu.KbRadarKeys)
                 {
-                    SetBigmapActive(true, false);
-                }
-                else
-                {
-                    if (IsBigmapActive() && GetGameTimer() - radarSwitchTimer > 8000)
+                    if (GetProfileSetting(221) == 1) // 221 = settings > display > expanded radar
                     {
-                        SetBigmapActive(false, false);
+                        SetBigmapActive(true, false);
                     }
-                    if (Game.IsControlJustReleased(0, Control.MultiplayerInfo) && MainMenu.MiscSettingsMenu.KbRadarKeys && !MenuController.IsAnyMenuOpen() && !IsPauseMenuActive())
+                    else
                     {
-                        bool radarExpanded = IsBigmapActive();
-
-                        if (radarExpanded)
+                        if (IsBigmapActive() && GetGameTimer() - radarSwitchTimer > 8000)
                         {
                             SetBigmapActive(false, false);
                         }
-                        else
+                        if (Game.IsControlJustReleased(0, Control.MultiplayerInfo) && MainMenu.MiscSettingsMenu.KbRadarKeys && !MenuController.IsAnyMenuOpen() && !IsPauseMenuActive())
                         {
-                            SetBigmapActive(true, false);
-                            radarSwitchTimer = GetGameTimer();
+                            bool radarExpanded = IsBigmapActive();
+
+                            if (radarExpanded)
+                            {
+                                SetBigmapActive(false, false);
+                            }
+                            else
+                            {
+                                SetBigmapActive(true, false);
+                                radarSwitchTimer = GetGameTimer();
+                            }
                         }
                     }
                 }
