@@ -754,7 +754,6 @@ namespace vMenuClient
             }
             
             // Enable the IPL menu if enabled via config and if the dependency is loaded and enabled.
-            Debug.Write($"{IplManager.IsDependencyPresentAndEnabled()} && {IplManager.IsIplIntegrationEnabled()}");
             if (IplManager.IsDependencyPresentAndEnabled() && IplManager.IsIplIntegrationEnabled())
             {
                 IplManagementMenu = new IplMenu();
