@@ -929,7 +929,7 @@ namespace vMenuClient
                         }
                     }
                 }
-                //This makes it so it's that this option has NO affect when it's toggle (Prevousily it would stop the map from being set big by another resource)
+                //This makes it so it's that this option has NO affect when it's toggle (Previously it would stop the map from being set big by another resource)
                 if (MainMenu.MiscSettingsMenu.KbRadarKeys)
                 {
                     if (GetProfileSetting(221) == 1) // 221 = settings > display > expanded radar
