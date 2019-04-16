@@ -15,6 +15,23 @@ namespace vMenuClient
 {
     public class IplManager : BaseScript
     {
+        static List<Vector3> blipLocations = new List<Vector3>();
+        public static void ToggleMapBlips()
+        {
+            if (IplMenu.EnableIplMapBlips)
+            {
+                foreach (Vector3 pos in blipLocations)
+                {
+                    var b = AddBlipForCoord(pos.X, pos.Y, pos.Z);
+                    SetBlipSprite(b, 40);
+                    SetBlipAsShortRange(b, true);
+                }
+            }
+            else
+            {
+                //remove blips
+            }
+        }        
         // Exports dictionary used to call exports. This is impossible to do directly from BaseScript itself for some stupid reason.
         //private static readonly ExportDictionary Exports = new ExportDictionary();
 
@@ -288,25 +305,22 @@ namespace vMenuClient
                     TvPosition = new Vector3(-1281.54f, 432.17f, 96.5f),
                 });
                 #endregion
-
-                if (IplMenu.EnableIplMapBlips)
+                
+                //var blipLocations = new List<Vector3>();
+                foreach (Interior inter in interiors)
                 {
-                    var blipLocations = new List<Vector3>();
-                    foreach (Interior inter in interiors)
+                    if (inter is Apartment || inter is Penthouse || inter is House)
                     {
-                        if (inter is Apartment || inter is Penthouse || inter is House)
+                        foreach (var pos in inter.posTpExt)
                         {
-                            foreach (var pos in inter.posTpExt)
+                            if (pos != Vector3.Zero)
                             {
-                                if (pos != Vector3.Zero)
+                                if (!blipLocations.Contains(pos))
                                 {
-                                    if (!blipLocations.Contains(pos))
-                                    {
-                                        var b = AddBlipForCoord(pos.X, pos.Y, pos.Z);
-                                        SetBlipSprite(b, 40);
-                                        blipLocations.Add(pos);
-                                        SetBlipAsShortRange(b, true);
-                                    }
+                                    //var b = AddBlipForCoord(pos.X, pos.Y, pos.Z);
+                                    //SetBlipSprite(b, 40);
+                                    blipLocations.Add(pos);
+                                    //SetBlipAsShortRange(b, true);
                                 }
                             }
                         }
@@ -2408,7 +2422,5 @@ namespace vMenuClient
         //    }
         //}
         #endregion
-
-
     }
 }

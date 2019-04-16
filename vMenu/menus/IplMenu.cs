@@ -128,6 +128,7 @@ namespace vMenuClient
                 if (item == enableBlipMarkers)
                 {
                     EnableIplMapBlips = _checked;
+                    IplManager.ToggleMapBlips();
                 }
                 if (item == enableInteriorTeleportMarkers)
                 {
