@@ -15,15 +15,22 @@ namespace vMenuClient
 {
     public class IplManager : BaseScript
     {
-        static List<Vector3> blipLocations = new List<Vector3>();
+        static List<Vector3> blipLocationsHouse = new List<Vector3>();
+        static List<Vector3> blipLocationsNightClubs = new List<Vector3>();
         public static void ToggleMapBlips()
         {
             if (IplMenu.EnableIplMapBlips)
             {
-                foreach (Vector3 pos in blipLocations)
+                foreach (Vector3 pos in blipLocationsHouse)
                 {
                     var b = AddBlipForCoord(pos.X, pos.Y, pos.Z);
                     SetBlipSprite(b, 40);
+                    SetBlipAsShortRange(b, true);
+                }
+                foreach (Vector3 pos in blipLocationsNightClubs)
+                {
+                    var b = AddBlipForCoord(pos.X, pos.Y, pos.Z);
+                    SetBlipSprite(b, 614);
                     SetBlipAsShortRange(b, true);
                 }
             }
@@ -315,11 +322,11 @@ namespace vMenuClient
                         {
                             if (pos != Vector3.Zero)
                             {
-                                if (!blipLocations.Contains(pos))
+                                if (!blipLocationsHouse.Contains(pos))
                                 {
                                     //var b = AddBlipForCoord(pos.X, pos.Y, pos.Z);
                                     //SetBlipSprite(b, 40);
-                                    blipLocations.Add(pos);
+                                    blipLocationsHouse.Add(pos);
                                     //SetBlipAsShortRange(b, true);
                                 }
                             }
@@ -371,9 +378,10 @@ namespace vMenuClient
                 {
                     if (!v.IsZero)
                     {
-                        var b = AddBlipForCoord(v.X, v.Y, v.Z);
-                        SetBlipSprite(b, 614);
-                        SetBlipAsShortRange(b, true);
+                        blipLocationsNightClubs.Add(v);
+                        //var b = AddBlipForCoord(v.X, v.Y, v.Z);
+                        //SetBlipSprite(b, 614);
+                        //SetBlipAsShortRange(b, true);
                     }
                 }
                 #endregion
